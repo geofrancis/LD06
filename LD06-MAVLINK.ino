@@ -41,6 +41,6 @@ void loop() {
   MAP_MAVLINK();
   if (ld06.isNewScan()) {
     MAVLINK_PROX();
-    Serial.println("scan");
+  //  Serial.println("scan");
   }
 }
