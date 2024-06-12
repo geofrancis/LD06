@@ -6,7 +6,7 @@
 
 
 unsigned long previousMillis = 0;
-const long interval = 200;
+const long interval = 1000;
 
 int lidarAngle = 0;
 int messageAngle = 0;
@@ -37,21 +37,10 @@ void setup() {
 
 void loop() {
 
-
-  if (ld06.readScan()) {  // Read lidar packets and return true when a new full 360° scan is available
-   uint16_t n = ld06.getNbPointsInScan();  // Give the number of points in the scan, can be usefull with filtering to tell if there are abstacles around the lidar
-    for (uint16_t i = 0; i < n; i++) {
-      //Serial.println(String() + ld06.getPoints(i)->angle + "," + ld06.getPoints(i)->distance + ";");  // example to show how to extract data. ->x, ->y and ->intensity are also available.
-      lidarAngle = ld06.getPoints(i)->angle;
-      messageAngle = map(lidarAngle, 0, 360, 0, 72);
-      distances[messageAngle] = (ld06.getPoints(i)->distance / 10);
-      Serial.print(messageAngle);
-      Serial.print(" ");
-      Serial.println(distances[messageAngle]);
-    }
-        if (ld06.isNewScan()) {  // Even if fullScan is disabled you can know when last data chunk have a loop closure
-     MAVLINK();
-    }
-
+  MAVLINK_HB();
+  MAP_MAVLINK();
+  if (ld06.isNewScan()) {
+    MAVLINK_PROX();
+    Serial.println("scan");
   }
 }
