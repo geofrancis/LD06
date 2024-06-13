@@ -89,14 +89,3 @@ void MAP_MAVLINK() {
   }
 }
 
-
-
-void AVOID_OUTPUT() {
-  mavlink_message_t msg;
-  uint8_t system_id = 255;       // id of computer which is sending the command (ground control software has id of 255)
-  uint8_t component_id = 2;      // seems like it can be any # except the number of what Pixhawk sys_id is
-  uint8_t target_system = 1;     // Id # of Pixhawk (should be 1)
-  uint8_t target_component = 0;  // Target component, 0 = all (seems to work with 0 or 1
-  mavlink_msg_rc_channels_override_pack(system_id, component_id, &msg, target_system, target_component, 0, 0, 0, steering, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-}
-
