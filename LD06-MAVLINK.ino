@@ -1,9 +1,6 @@
 
 #include "mavlink/common/mavlink.h"  // Mavlink interface
 #include "mavlink/common/mavlink_msg_obstacle_distance.h"
-#include "mavlink/common/mavlink_msg_rc_channels.h"
-#include "mavlink/common/mavlink_msg_servo_output_raw.h"
-#include "mavlink/common/mavlink_msg_rc_channels_override.h"
 
 unsigned long previousMillis = 0;
 const long interval = 1000;
