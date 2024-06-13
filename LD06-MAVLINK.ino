@@ -36,7 +36,7 @@ void setup() {
 
 void loop() {
 
-  MAVLINK_HB();
+
   MAP_MAVLINK();
   
   }
@@ -46,6 +46,7 @@ void setup1() {}
 
 
 void loop1() {
+    MAVLINK_HB();
   if (ld06.isNewScan()) {
     MAVLINK_PROX();
     Serial.println("scan");
