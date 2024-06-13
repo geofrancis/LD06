@@ -3,7 +3,7 @@
 #include "mavlink/common/mavlink_msg_obstacle_distance.h"
 #include "mavlink/common/mavlink_msg_rc_channels.h"
 #include "mavlink/common/mavlink_msg_servo_output_raw.h"
-
+#include "mavlink/common/mavlink_msg_rc_channels_override.h"
 
 unsigned long previousMillis = 0;
 const long interval = 1000;
@@ -21,11 +21,10 @@ uint8_t Index;
 byte received;
 char serial_buffer[15];
 
-
+int steering = 1500;
 
 #include "ld06.h"
-LD06 ld06(Serial1);  // ld06 constructor, need to specify the hardware serial you want to use with the ld06 ( You can use Serial instead of Serial1 on arduino uno )
-
+LD06 ld06(Serial1);  
 
 void setup() {
 
@@ -39,8 +38,17 @@ void loop() {
 
   MAVLINK_HB();
   MAP_MAVLINK();
+  
+  }
+
+
+void setup1() {}
+
+
+void loop1() {
   if (ld06.isNewScan()) {
     MAVLINK_PROX();
-  //  Serial.println("scan");
+    Serial.println("scan");
+
   }
 }
